@@ -1,41 +1,31 @@
-pipeline {
-
-  environment {
-    dockerimagename = "imaduddinqurrataayun/restapi"
-    dockerImage = ""
-  }
-
-  agent any
-
-  stages {
-
-//     stage('Checkout Source') {
-//       steps {
-//         git 'https://github.com/imaduddinqurrataayun/restapi-nodejs.git'
-//       }
-//     }
-
-    stage('Build image') {
-      steps{
-        script {
-          dockerImage = docker.build dockerimagename
+pipeline{
+    agent{
+        kubernetes{
+            yaml '''
+                apiVersion: v1
+                kind: Pod
+                metadata:
+                    name:docker
+                spec:
+                serviceAccountName: jenkins-admin
+                containers:
+                - name: docker
+                  image: docker:latest
+                  command:
+                  - cat
+                  tty: true
+                '''
         }
-      }
     }
-
-    stage('Pushing Image') {
-      environment {
-               registryCredential = 'dockerhub-imad'
-           }
-      steps{
-        script {
-          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-            dockerImage.push("1.0")
-          }
+    stages{
+        stage('Build Image'){
+            steps{
+                container('docker') {
+                    sh """
+                        docker build -t imaduddinqurrataayun/restapi:1.0 .
+                    """
+                }
+            }
         }
-      }
     }
-
-  }
-
 }
