@@ -15,7 +15,7 @@ pipeline{
         }
     }
     stages{
-        stage(Build Image){
+        stage('Build Image'){
             steps{
                 container('docker') {
                     sh """
