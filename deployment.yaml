@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: restapi
+  name: restapi
+spec:
+  selector:
+    matchLabels:
+      app: restapi
+  template:
+    metadata:
+      labels:
+        app: restapi
+    spec:
+      containers:
+      - image: imaduddinqurrataayun/restapi:1.0
+        name: restapi
+        ports:
+        - containerPort: 3002
+        resources:
+          requests:
+            memory: "200Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: restapi-svc
+spec:
+  selector:
+    app: restapi
+  type: ClusterIP
+  ports:
+    - port: 80
+    targetPort: 3002
+
