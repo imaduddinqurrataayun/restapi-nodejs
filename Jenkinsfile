@@ -9,11 +9,11 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/imaduddinqurrataayun/restapi-nodejs.git'
-      }
-    }
+//     stage('Checkout Source') {
+//       steps {
+//         git 'https://github.com/imaduddinqurrataayun/restapi-nodejs.git'
+//       }
+//     }
 
     stage('Build image') {
       steps{
