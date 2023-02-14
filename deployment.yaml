@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
       - image: imaduddinqurrataayun/restapi:1.0
+        imagePullPolicy: Always
         name: restapi
         ports:
         - containerPort: 3002
