@@ -14,7 +14,7 @@ spec:
         app: restapi
     spec:
       containers:
-      - image: imaduddinqurrataayun/restapi:1.0
+      - image: imaduddinqurrataayun/restapi:latest
         imagePullPolicy: Always
         name: restapi
         ports:
