@@ -24,7 +24,7 @@ db.connect(function(err) {
 });
 
 // read
-app.get('/cek', (req, res) => {
+app.get('/read', (req, res) => {
   const sqlQuery = "SELECT * FROM barang";
 
   db.query(sqlQuery, (err, result) => {
