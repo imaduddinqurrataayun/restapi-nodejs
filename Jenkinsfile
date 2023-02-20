@@ -4,16 +4,13 @@ pipeline{
             yaml '''
                 apiVersion: v1
                 kind: Pod
-                metadata:
-                    name:docker
                 spec:
-                serviceAccountName: jenkins-admin
-                containers:
-                - name: docker
-                  image: docker:latest
-                  command:
-                  - cat
-                  tty: true
+                    containers:
+                    - name: docker
+                      image: docker:dind
+                      command:
+                      - cat
+                      tty: true
                 '''
         }
     }
@@ -22,7 +19,9 @@ pipeline{
             steps{
                 container('docker') {
                     sh """
-                        docker build -t imaduddinqurrataayun/restapi:1.0 .
+                        docker login -u imaduddinqurrataayun -pdckr_pat_WwN642aKzNArYQRnT1hLi5yi2tw
+                        docker build -t imaduddinqurrataayun/restapi:latest .
+                        docker push imaduddinqurrataayun/restapi:latest
                     """
                 }
             }
