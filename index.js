@@ -24,7 +24,7 @@ db.connect(function(err) {
 });
 
 // read
-app.get('/read', (req, res) => {
+app.get('/view', (req, res) => {
   const sqlQuery = "SELECT * FROM barang";
 
   db.query(sqlQuery, (err, result) => {
