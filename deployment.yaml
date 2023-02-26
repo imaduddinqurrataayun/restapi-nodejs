@@ -13,6 +13,8 @@ spec:
       labels:
         app: restapi
     spec:
+      imagePullSeret:
+      - name: pull-secret
       containers:
       - image: imaduddinqurrataayun/restapi:latest
         imagePullPolicy: Always
