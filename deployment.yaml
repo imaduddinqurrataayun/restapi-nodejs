@@ -20,13 +20,13 @@ spec:
         imagePullPolicy: Always
         name: restapi
         ports:
-        - containerPort: 3002
+        - containerPort: 3000
         resources:
           requests:
             memory: "200Mi"
-            cpu: "250m"
+            cpu: "200m"
           limits:
-            memory: "1Gi"
+            memory: "0.5Gi"
             cpu: "500m"
 ---
 apiVersion: v1
@@ -39,7 +39,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 3002
+      targetPort: 3000
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -48,7 +48,7 @@ metadata:
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  ingressClassName: nginx
+  #ingressClassName: nginx
   rules:
   - host: 'restapi.imad.lyr.id'
     http:
@@ -60,9 +60,7 @@ spec:
             name: restapi-svc
             port:
               number: 80
-
   tls:
     - hosts:
       - 'restapi.imad.lyr.id'
       secretName: restapi-tls
-
