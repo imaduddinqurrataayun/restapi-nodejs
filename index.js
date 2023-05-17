@@ -10,11 +10,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const mysql = require('mysql');
 
 const db = mysql.createConnection({
-  host: '103.150.121.177',
+  host: '103.89.165.224',
   user: 'root',
-  password: 'YUIidhb667',
-  // username: 'imad',
-  // userpassword: 'TxjT0txl1C5u',
+  password: 'M0U4ZvPT1t4Y',
   database: 'penjualan'
 });
 
@@ -50,7 +48,6 @@ app.get('/read/:id_barang', (req, res) => {
     }
   });
 });
-// #####
 
 // create
 app.post('/create', (req, res) => {
@@ -70,7 +67,6 @@ app.post('/create', (req, res) => {
     }
   });
 });
-// #####
 
 // update
 app.put('/update', (req, res) => {
@@ -90,7 +86,6 @@ app.put('/update', (req, res) => {
     }
   });
 });
-// #####
 
 // delete
 app.delete('/delete', (req, res) => {
@@ -106,8 +101,7 @@ app.delete('/delete', (req, res) => {
     }
   });
 });
-// #####
 
-app.listen(3002, () => {
-  console.log('running port 3002');
+app.listen(3000, () => {
+  console.log('running port 3000');
 });
