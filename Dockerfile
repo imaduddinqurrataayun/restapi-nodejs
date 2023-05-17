@@ -1,7 +1,7 @@
 FROM node:19.4.0
 
-WORKDIR usr/src/app/restapi-nodejs/
+WORKDIR usr/src/restapi-nodejs
 COPY . .
 RUN npm install
 CMD ["npm", "start"]
-EXPOSE 3002
+EXPOSE 3000
