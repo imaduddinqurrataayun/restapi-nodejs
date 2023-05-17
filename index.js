@@ -2,11 +2,24 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const cors = require('cors');
 const app = express();
-const { db } = require('./config/dbconnect.js');
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+const mysql = require('mysql');
+
+const db = mysql.createConnection({
+  host: '103.89.165.224',
+  user: 'root',
+  password: 'M0U4ZvPT1t4Y',
+  database: 'penjualan'
+});
+
+db.connect(function(err) {
+ if (err) throw err;
+ console.log("Connected!");
+});
 
 // read
 app.get('/read', (req, res) => {
@@ -35,7 +48,6 @@ app.get('/read/:id_barang', (req, res) => {
     }
   });
 });
-// #####
 
 // create
 app.post('/create', (req, res) => {
@@ -55,7 +67,6 @@ app.post('/create', (req, res) => {
     }
   });
 });
-// #####
 
 // update
 app.put('/update', (req, res) => {
@@ -75,7 +86,6 @@ app.put('/update', (req, res) => {
     }
   });
 });
-// #####
 
 // delete
 app.delete('/delete', (req, res) => {
@@ -91,8 +101,7 @@ app.delete('/delete', (req, res) => {
     }
   });
 });
-// #####
 
-app.listen(3002, () => {
-  console.log('running port 3002');
+app.listen(3000, () => {
+  console.log('running port 3000');
 });
