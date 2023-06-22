@@ -4,7 +4,9 @@ metadata:
   labels:
     app: restapi
   name: restapi
+  namespace: jenkins
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: restapi
@@ -33,6 +35,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: restapi-svc
+  namespace: jenkins
 spec:
   selector:
     app: restapi
@@ -45,12 +48,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: restapi-ingress
+  namespace: jenkins
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   #ingressClassName: nginx
   rules:
-  - host: 'restapi.imad.lyr.id'
+  - host: 'restapijenkins.imad.lyr.id'
     http:
       paths:
       - path: / #/api(/|$)(.*)
@@ -62,5 +66,5 @@ spec:
               number: 80
   tls:
     - hosts:
-      - 'restapi.imad.lyr.id'
-      secretName: restapi-tls
+      - 'restapijenkins.imad.lyr.id'
+      secretName: restapijenkins-tls
